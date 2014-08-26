@@ -1,4 +1,4 @@
-from centos
+from centos:centos6
 MAINTAINER borders, Inc.
 
 # Install EPEL
@@ -8,7 +8,12 @@ RUN yum localinstall http://dl.iuscommunity.org/pub/ius/stable/CentOS/6/x86_64/i
 
 # Update Current Image
 RUN yum install -y git make gcc dstat postmaster
-RUN yum update -y
+#RUN yum update -y
+
+# Install Dependencies common
+RUN yum install -y  libgmp httpd 
+
+
 
 # Install PHP Dependencies for POST
 #php
@@ -21,4 +26,10 @@ RUN yum update -y
 #php-pear
 RUN yum -y install --enablerepo=remi php php-mbstring php-pdo php-cli php-process php-pgsql php-gd php-pear
 
-# Install PHP De 
+# Install pear Dependencies for POST
+
+RUN pear install Archive_Tar Archive_Zip-beta Auth_SASL Config Console_Getopt 
+RUN pear install HTML_Template_IT Image_Canvas-alpha  Image_Color  Image_Graph-alpha  
+RUN pear install Log  Mail  Mail_Mime  Mail_mimeDecode  Net_IPv4 Net_POP3  Net_SMTP  Net_Socket  Net_UserAgent_Detect  Net_UserAgent_Mobile  
+RUN pear install Numbers_Roman  Numbers_Words-beta PEAR  Structures_Graph  XML_Parser  XML_RPC  XML_Serializer-beta  
+RUN pear install XML_Util  http_request2-alpha System_Daemon-beta

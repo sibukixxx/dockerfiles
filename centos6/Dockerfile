@@ -57,6 +57,12 @@ http_request2-alpha           \
 System_Daemon-beta            \
 
 
+RUN git clone http://gitlab.borders.jp/post/takada_test_cpost.git /cposthome
+ADD /www/php.ini /etc/php.ini
+ADD /www/mod_bw.conf /etc/httpd/conf.d/mod_bw.conf
+ADD /www/mod_extract_forwarded.conf /etc/httpd/conf.d/mod_extract_forwarded.conf
+
+
 EXPOSE 80
 CMD    [ "apachectl", \
          "-d", "/usr/sbin/", \

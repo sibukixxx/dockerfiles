@@ -24,12 +24,52 @@ RUN yum install -y  libgmp httpd
 #php-pgsql 
 #php-gd 
 #php-pear
-RUN yum -y install --enablerepo=remi php php-mbstring php-pdo php-cli php-process php-pgsql php-gd php-pear
+RUN yum -y install --enablerepo=remi 
+php          \
+php-mbstring \
+php-pdo      \
+php-cli      \
+php-process  \
+php-pgsql    \
+php-gd       \
+php-pear
 
 # Install pear Dependencies for POST
 
-RUN pear install Archive_Tar Archive_Zip-beta Auth_SASL Config Console_Getopt 
-RUN pear install HTML_Template_IT Image_Canvas-alpha  Image_Color  Image_Graph-alpha  
-RUN pear install Log  Mail  Mail_Mime  Mail_mimeDecode  Net_IPv4 Net_POP3  Net_SMTP  Net_Socket  Net_UserAgent_Detect  Net_UserAgent_Mobile  
-RUN pear install Numbers_Roman  Numbers_Words-beta PEAR  Structures_Graph  XML_Parser  XML_RPC  XML_Serializer-beta  
-RUN pear install XML_Util  http_request2-alpha System_Daemon-beta
+RUN pear install              \ 
+Archive_Tar                   \
+Archive_Zip-beta              \
+Auth_SASL                     \
+Config                        \
+Console_Getopt                \
+HTML_Template_IT              \
+Image_Canvas-alpha            \
+Image_Color                   \
+Image_Graph-alpha             \
+Log                           \
+Mail                          \
+Mail_Mime                     \
+Mail_mimeDecode               \
+Net_IPv4                      \
+Net_POP3                      \
+Net_SMTP                      \
+Net_Socket                    \
+Net_UserAgent_Detect          \
+Net_UserAgent_Mobile          \
+Numbers_Roman                 \
+Numbers_Words-beta            \
+PEAR                          \
+Structures_Graph              \
+XML_Parser                    \
+XML_RPC                       \
+XML_Serializer-beta           \
+XML_Util                      \
+http_request2-alpha           \
+System_Daemon-beta            \
+
+
+EXPOSE 80
+CMD    [ "apachectl", \
+         "-d", "/usr/sbin/", \
+         "-f", "/www/httpd.conf", \
+         "-DFOREGROUND" ]

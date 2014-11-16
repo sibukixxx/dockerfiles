@@ -1,2 +1,6 @@
-- name: install the latest version of Apache
-  yum: name=httpd state=latest
+---
+- hosts: all
+  user: root
+  tasks:
+    - name: install mysql
+      yum: name=mysql state=installed

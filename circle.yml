@@ -3,20 +3,12 @@ machine:
     - docker
 
 dependencies:
-  override:
-    - docker info
-    - docker build -t circleci/elasticsearch .
+  pre:
+    - if [[ -e docker_ansible_image.tar ]]; then cat docker_ansible_image.tar | docker import - kenjiskywalker/dockerfile-centos-ansible ; docker load --input docker_ansible_image.tar ; else docker build . ; docker save -o docker_ansible_image.tar kenjiskywalker/dockerfile-centos-ansible ; fi
+
+  cache_directories:
+    - "docker_ansible_image.tar"
 
 test:
-  override:
-    - docker run -d -p 9200:9200 circleci/elasticsearch; sleep 10
-    - curl --retry 10 --retry-delay 5 -v http://localhost:9200
-
-deployment:
-  hub:
-    branch: master
-    commands:
-      - sed "s/<EMAIL>/$DOCKER_EMAIL/;s/<AUTH>/$DOCKER_AUTH/" \
-          < .dockercfg.template > ~/.dockercfg
-      - docker push circleci/elasticsearch
-
+  post:
+    - docker run -v `pwd`/ansible:/ansible kenjiskywalker/dockerfile-centos-ansible ansible-playbook /ansible/ci.yml -i /ansible/inventory_localhost -c local

@@ -1,0 +1,3 @@
+  tasks:
+  - name: create directory
+    file: path=/work/test state=directory owner=docker group=docker mode=0755

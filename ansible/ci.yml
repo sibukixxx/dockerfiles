@@ -1,3 +1,3 @@
-  tasks:
-  - name: create directory
-    file: path=/work/test state=directory owner=docker group=docker mode=0755
+- name: common | setup impactGroup group
+  group: name=group system=no gid=510
+  ignore_errors: yes

@@ -1,2 +1,2 @@
-- name: common | setup impactGroup group
-  group: name=group system=no gid=510
+- name: install the latest version of Apache
+  yum: name=httpd state=latest

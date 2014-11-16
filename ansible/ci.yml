@@ -1,3 +1,2 @@
 - name: common | setup impactGroup group
   group: name=group system=no gid=510
-  ignore_errors: yes

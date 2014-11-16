@@ -1,2 +1,0 @@
-  - name: gathering data task example
-    command: echo {{ ansible_eth0.ipv4.address }}

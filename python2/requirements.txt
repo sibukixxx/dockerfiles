@@ -1,0 +1,4 @@
+boto==2.42.0
+flake8==3.0.4
+Jinja2==2.7.3
+pyramid==1.7.3
